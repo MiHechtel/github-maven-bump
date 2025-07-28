@@ -1,0 +1,47 @@
+name: effect action
+description: A template for a github action with error reporning, using effect.
+
+branding:
+  icon: git-commit
+  color: blue
+
+inputs:
+  major_keywords:
+    description: 'Keywords für Major-Bump'
+    required: false
+    default: 'BREAKING CHANGE,major'
+  pom_path:
+    description: 'Pfad zur pom.xml Datei'
+    required: false
+    default: 'pom.xml'
+  minor_keywords:
+    description: 'Keywords für Minor-Bump'
+    required: false
+    default: 'feat,minor'
+  patch_keywords:
+    description: 'Keywords für Patch-Bump'
+    required: false
+    default: 'fix,patch'
+  default_to_patch:
+    description: 'Wenn kein Keyword gefunden, auf Patch defaulten'
+    required: false
+    default: 'true'
+  tag_prefix:
+    description: 'Prefix für Git-Tag'
+    required: false
+    default: 'v'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Bump and Output Version
+      env:
+        TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        POM_PATH: ${{ inputs.pom_path }}
+        MAJOR_KEYWORDS: ${{ inputs.major_keywords }}
+        MINOR_KEYWORDS: ${{ inputs.minor_keywords }}
+        PATCH_KEYWORDS: ${{ inputs.patch_keywords }}
+        DEFAULT_TO_PATCH: ${{ inputs.default_to_patch }}
+        TAG_PREFIX: ${{ inputs.tag_prefix }}
+      run: ${{github.action_path}}/bump-version.sh
+      shell: bash
