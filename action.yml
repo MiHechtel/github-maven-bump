@@ -1,0 +1,46 @@
+name: Github Action Maven Version Bump
+description: An action to bump the version of a Maven project based on commit messages including a patch-default and a tag prefix.
+
+branding:
+  icon: git-commit
+  color: blue
+
+inputs:
+  pom_path:
+    description: 'Path to the pom.xml file'
+    required: false
+    default: 'pom.xml'
+  major_keyword:
+    description: 'Keywords to trigger a major version bump'
+    required: false
+    default: 'major'
+  minor_keyword:
+    description: 'Keywords to trigger a minor version bump'
+    required: false
+    default: 'minor'
+  patch_keyword:
+    description: 'Keywords to trigger a patch version bump'
+    required: false
+    default: 'patch'
+  default_to_patch:
+    description: 'If true, defaults to patch bump when no keyword is found'
+    required: false
+    default: 'false'
+  tag_prefix:
+    description: 'Prefix to use for the git tag'
+    required: false
+    default: 'v'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Bump and Output Version
+      env:
+        POM_PATH: ${{ inputs.pom_path }}
+        MAJOR_KEYWORDS: ${{ inputs.major_keywords }}
+        MINOR_KEYWORDS: ${{ inputs.minor_keywords }}
+        PATCH_KEYWORDS: ${{ inputs.patch_keywords }}
+        DEFAULT_TO_PATCH: ${{ inputs.default_to_patch }}
+        TAG_PREFIX: ${{ inputs.tag_prefix }}
+      run: ${{github.action_path}}/bump-version.sh
+      shell: bash
