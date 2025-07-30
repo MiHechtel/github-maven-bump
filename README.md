@@ -10,14 +10,16 @@ A simple GitHub Action to automatically bump the version in a Maven `pom.xml` fi
 
 ## Inputs
 
-| Name               | Description                                                                             | Required | Default   |
-|--------------------|-----------------------------------------------------------------------------------------|:--------:|-----------|
-| `pom_path`         | Path to the `pom.xml` file to update. Example: `./backend/pom.xml`                      |    No    | `pom.xml` |
-| `major_keyword`    | Comma-separated keywords that trigger a major version bump (e.g. BREAKING-CHANGE,major) |    No    | `major`   |
-| `minor_keyword`    | Comma-separated keywords that trigger a minor version bump (e.g. feature,minor)         |    No    | `minor`   |
-| `patch_keyword`    | Comma-separated keywords that trigger a patch version bump (e.g. chore,fix)             |    No    | `patch`   |
-| `default_to_patch` | If set to `true`, a patch bump is performed if no keyword is found in commit messages   |    No    | `false`   |
-| `tag_prefix`       | Prefix to use for the created git tag (e.g., `v` for tags like `v1.2.3`)                |    No    | `v`       |
+| Name               | Description                                                                             | Required | Default                                      |
+|--------------------|-----------------------------------------------------------------------------------------|:--------:|----------------------------------------------|
+| `pom_path`         | Path to the `pom.xml` file to update. Example: `./backend/pom.xml`                      |    No    | `pom.xml`                                    |
+| `major_keyword`    | Comma-separated keywords that trigger a major version bump (e.g. BREAKING-CHANGE,major) |    No    | `major`                                      |
+| `minor_keyword`    | Comma-separated keywords that trigger a minor version bump (e.g. feature,minor)         |    No    | `minor`                                      |
+| `patch_keyword`    | Comma-separated keywords that trigger a patch version bump (e.g. chore,fix)             |    No    | `patch`                                      |
+| `default_to_patch` | If set to `true`, a patch bump is performed if no keyword is found in commit messages   |    No    | `false`                                      |
+| `tag_prefix`       | Prefix to use for the created git tag (e.g., `v` for tags like `v1.2.3`)                |    No    | `v`                                          |
+| `git_user_name`    | Name of the git user for committing changes e.g. `MiHechtel`                            |    No    | `${ github.actor }`                          |
+| `git_user_email`   | Email of the git user for committing changes e.g. `MiHechtel@noreply.github.com`        |    No    | `${ github.actor }@users.noreply.github.com` |
 
 ## Outputs
 

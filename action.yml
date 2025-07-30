@@ -30,6 +30,14 @@ inputs:
     description: 'Prefix to use for the git tag'
     required: false
     default: 'v'
+  git_user_name:
+    description: 'Name of the git user for committing changes'
+    required: false
+    default: ''
+  git_user_email:
+    description: 'Email of the git user for committing changes'
+    required: false
+    default: ''
 
 runs:
   using: "composite"
@@ -42,5 +50,9 @@ runs:
         PATCH_KEYWORDS: ${{ inputs.patch_keywords }}
         DEFAULT_TO_PATCH: ${{ inputs.default_to_patch }}
         TAG_PREFIX: ${{ inputs.tag_prefix }}
+        GIT_USER_NAME: ${{ inputs.git_user_name }}
+        GIT_USER_EMAIL: ${{ inputs.git_user_email }}
+        GITHUB_ACTOR: ${{ github.actor }}
+
       run: ${{github.action_path}}/scripts/bump-version.sh
       shell: bash
