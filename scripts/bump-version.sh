@@ -7,6 +7,8 @@ PATCH_KEYWORDS="${PATCH_KEYWORDS:-fix,patch}"
 DEFAULT_TO_PATCH="${DEFAULT_TO_PATCH:-true}"
 TAG_PREFIX="${TAG_PREFIX:-v}"
 POM_PATH="${POM_PATH:-pom.xml}"
+GIT_USER_NAME="${GIT_USER_NAME:-${GITHUB_ACTOR:-github-actions[bot]}}"
+GIT_USER_EMAIL="${GIT_USER_EMAIL:-${GITHUB_ACTOR:-github-actions[bot]}@users.noreply.github.com}"
 
 COMMIT_MSG=$(git log -1 --pretty=%B | tr '[:upper:]' '[:lower:]')
 
@@ -83,8 +85,8 @@ NEW_VERSION=$(semver_bump "$CURRENT_VERSION" "$BUMP_TYPE")
 
 mvn --batch-mode versions:set -DnewVersion="$NEW_VERSION" -f "$POM_PATH"
 
-git config user.name "github-actions[bot]"
-git config user.email "github-actions[bot]@users.noreply.github.com"
+git config user.name "$GIT_USER_NAME"
+git config user.email "$GIT_USER_EMAIL"
 git add "$POM_PATH"
 git commit -m "chore: bump pom.xml version from $CURRENT_VERSION to $NEW_VERSION"
 
