@@ -51,8 +51,8 @@ fi
 
 if [[ -z "$BUMP_TYPE" && "$DEFAULT_TO_PATCH" != "true" ]]; then
   echo "No bump type found and patch fallback is disabled."
-  echo "new-version=$CURRENT_VERSION" >> "$GITHUB_OUTPUT"
-  echo "bump-performed=false" >> "$GITHUB_OUTPUT"
+  echo "new_version=$CURRENT_VERSION" >> "$GITHUB_OUTPUT"
+  echo "bump_performed=false" >> "$GITHUB_OUTPUT"
   exit 0
 fi
 
@@ -95,5 +95,5 @@ git tag "$TAG"
 git push origin "$TAG"
 git push origin HEAD
 
-echo "new-version=$NEW_VERSION" >> "$GITHUB_OUTPUT"
-echo "bump-performed=true" >> "$GITHUB_OUTPUT"
+echo "new_version=$NEW_VERSION" >> "$GITHUB_OUTPUT"
+echo "bump_performed=true" >> "$GITHUB_OUTPUT"

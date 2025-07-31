@@ -25,8 +25,8 @@ A simple GitHub Action to automatically bump the version in a Maven `pom.xml` fi
 
 | Name             | Description                                                        |
 |------------------|--------------------------------------------------------------------|
-| `new-version`    | The new version number in `pom.xml` after the bump (e.g., `1.2.4`) |
-| `bump-performed` | Boolean to indicate if version was bumped                          |
+| `new_version`    | The new version number in `pom.xml` after the bump (e.g., `1.2.4`) |
+| `bump_performed` | Boolean to indicate if version was bumped                          |
 
 ## Example Usage
 

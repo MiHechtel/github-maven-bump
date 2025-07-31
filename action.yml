@@ -39,10 +39,19 @@ inputs:
     required: false
     default: ''
 
+outputs:
+    new_version:
+        description: 'The new version of the Maven project after bumping'
+        value: ${{ steps.bump.outputs.new_version }}
+    bump_performed:
+        description: 'Indicates if a version bump was performed'
+        value: ${{ steps.bump.outputs.bump_performed }}
+
 runs:
   using: "composite"
   steps:
     - name: Bump and Output Version
+      id: bump
       env:
         POM_PATH: ${{ inputs.pom_path }}
         MAJOR_KEYWORDS: ${{ inputs.major_keywords }}
